@@ -12,6 +12,8 @@ public class ORMConfig {
 		LocalEntityManagerFactoryBean bean = new LocalEntityManagerFactoryBean();
 		bean.setPersistenceUnitName("survey");
 		return bean;
+		
+		
 	}
 
 }
