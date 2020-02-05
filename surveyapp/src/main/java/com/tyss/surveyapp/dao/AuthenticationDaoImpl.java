@@ -76,8 +76,24 @@ public class AuthenticationDaoImpl implements AuthenticationDao {
 
 	@Override
 	public boolean updateUser(AuthenticationDto authenticationDto) {
-
-		return false;
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		try {
+			String findUser = "from AuthenticationDto where userName=:userName";
+			Query query = entityManager.createQuery(findUser);
+			query.setParameter("userName", authenticationDto.getUserName());
+			AuthenticationDto userFound = (AuthenticationDto) query.getSingleResult();
+			
+			AuthenticationDto userDataToBeChanged=entityManager.find(AuthenticationDto.class, userFound.getAuthenticationID());
+			userDataToBeChanged.setPassword(authenticationDto.getPassword());
+			transaction.begin();
+			entityManager.persist(userDataToBeChanged);
+			transaction.commit();	
+			return true;
+		} catch (Exception e) {
+			transaction.rollback();
+			throw new AdminException("Password modification unsuccessful, Username does`nt exists !!");
+		}
 	}
 
 }
