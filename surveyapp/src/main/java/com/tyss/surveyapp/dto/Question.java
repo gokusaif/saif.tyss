@@ -3,12 +3,12 @@ package com.tyss.surveyapp.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -35,10 +35,10 @@ public class Question implements Serializable{
 	@Column
 	private String questionType;
 	
-
-	@OneToMany(cascade = CascadeType.ALL)
+	@ElementCollection
+	@CollectionTable(name="options")
 	@Column
-	private List<Options> options;
+	private List<String> options;
 	
 	
 }
