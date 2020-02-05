@@ -8,14 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 
 @Data
-@Table( name = "option")
+@Table( name = "options")
 @Entity
-public class Option implements Serializable{
+public class Options implements Serializable{
 	
 	/**
 	 * 
@@ -25,10 +23,10 @@ public class Option implements Serializable{
 	@Id
 	@Column
 	@GeneratedValue
-	private int optionId1;
+	private int optionId;
 
 	@Column
-	@JsonProperty("option")
-	private String option;
+	private String option1;
 	
+
 }

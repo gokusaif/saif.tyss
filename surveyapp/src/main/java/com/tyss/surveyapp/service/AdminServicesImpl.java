@@ -1,5 +1,7 @@
 package com.tyss.surveyapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +20,11 @@ public class AdminServicesImpl implements AdminServices{
 		return adminDao.addQuestions(questions);
 	}
 
+	@Override
+	public List<Questions> retrive() {
+		
+		return adminDao.retrive();
+	}
+
+	
 }

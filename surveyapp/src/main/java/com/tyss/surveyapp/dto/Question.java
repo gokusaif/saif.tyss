@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 
 @Data
@@ -40,41 +38,7 @@ public class Question implements Serializable{
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@Column
-	private List<Option> options;
-
-	public int getQuestionId() {
-		return questionId;
-	}
-
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
-	}
-
-	public String getQuestionName() {
-		return questionName;
-	}
-
-	public void setQuestionName(String questionName) {
-		this.questionName = questionName;
-	}
-
-	public String getQuestionType() {
-		return questionType;
-	}
-
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
-	}
-
-	public List<Option> getOptions() {
-		return options;
-	}
-
-	@JsonProperty("option")
-	public void setOptions(List<Option> options) {
-		this.options = options;
-	} 
-	
+	private List<Options> options;
 	
 	
 }
