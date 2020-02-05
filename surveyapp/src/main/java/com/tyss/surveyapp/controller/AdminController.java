@@ -27,9 +27,6 @@ public class AdminController {
 		if (adminServices.addQuestions(questions)) {
 			adminResponse.setStatusCode(201);
 			adminResponse.setMessage("Success");
-		} else {
-			adminResponse.setStatusCode(406);
-			adminResponse.setMessage("Failure survey name already exists");
 		}
 		return adminResponse;
 	}
@@ -57,10 +54,7 @@ public class AdminController {
 			adminResponse.setStatusCode(201);
 			adminResponse.setMessage("Success");
 			adminResponse.setSurvey(survey);			
-		} else {
-			adminResponse.setStatusCode(406);
-			adminResponse.setMessage("Survey does not exist");
-		}
+		} 
 		return adminResponse;
 	}
 	
@@ -70,9 +64,6 @@ public class AdminController {
 		if(adminServices.removeSurvey(surveyName)) {
 			adminResponse.setStatusCode(201);
 			adminResponse.setMessage("Survey Deleted");
-		} else {
-			adminResponse.setStatusCode(406);
-			adminResponse.setMessage("Survey does not exist");
 		}
 		return adminResponse;
 	}
