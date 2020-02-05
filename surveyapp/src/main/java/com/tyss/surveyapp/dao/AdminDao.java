@@ -9,6 +9,9 @@ public interface AdminDao {
 	public boolean addQuestions(Questions questions);
 	
 	public List<Questions> retrive();
-
+	
+	public Questions retriveSurvey(String surveyName);
+	
+	public boolean removeSurvey(String surveyName);
 	
 }

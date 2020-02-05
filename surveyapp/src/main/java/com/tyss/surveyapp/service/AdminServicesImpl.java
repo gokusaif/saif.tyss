@@ -26,5 +26,19 @@ public class AdminServicesImpl implements AdminServices{
 		return adminDao.retrive();
 	}
 
+	@Override
+	public Questions retriveSurvey(String surveyName) {
+		
+		return adminDao.retriveSurvey(surveyName);
+	}
+
+	@Override
+	public boolean removeSurvey(String surveyName) {
+		
+		return adminDao.removeSurvey(surveyName);
+	}
+
+
+
 	
 }

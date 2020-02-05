@@ -28,7 +28,6 @@ public class AdminDaoImpl implements AdminDao {
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 
@@ -36,11 +35,32 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public List<Questions> retrive() {
-		
+
 		EntityManager manager = factory.createEntityManager();
 		String jpql = "from Questions";
-		TypedQuery<Questions> query = manager.createQuery(jpql,Questions.class);
+		TypedQuery<Questions> query = manager.createQuery(jpql, Questions.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public Questions retriveSurvey(String surveyName) {
+		EntityManager manager = factory.createEntityManager();
+		Questions survey = manager.find(Questions.class, surveyName);
+		return survey;
+	}
+
+	@Override
+	public boolean removeSurvey(String surveyName) {
+		EntityManager manager = factory.createEntityManager();
+		Questions survey = manager.find(Questions.class, surveyName);
+		if (survey != null) {
+			EntityTransaction transaction = manager.getTransaction();
+			transaction.begin();
+			manager.remove(survey);
+			transaction.commit();
+			return true;
+		}
+		return false;
 	}
 
 }

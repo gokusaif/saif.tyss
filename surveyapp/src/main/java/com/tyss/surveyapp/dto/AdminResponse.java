@@ -11,6 +11,8 @@ public class AdminResponse {
 	
 	private String message;
 	
-	private List<Questions> questions;
+	private List<Questions> surveys;
+	
+	private Questions survey;
 
 }

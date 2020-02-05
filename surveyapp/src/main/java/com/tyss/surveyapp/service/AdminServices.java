@@ -11,4 +11,8 @@ public interface AdminServices {
 	
 	public List<Questions> retrive();	
 	
+	public Questions retriveSurvey(String surveyName);
+	
+	public boolean removeSurvey(String surveyName);
+	
 }
