@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.tyss.surveyapp.dto.AuthenticationDto;
+import com.tyss.surveyapp.exceptions.AdminException;
 
 @Repository
 public class AuthenticationDaoImpl implements AuthenticationDao{
@@ -42,10 +43,14 @@ public class AuthenticationDaoImpl implements AuthenticationDao{
 		query.setParameter("userName", authenticationDto.getUserName());
 		query.setParameter("password", authenticationDto.getPassword());
 		transaction.begin();
-		
-		
+		int delete=query.executeUpdate();
+		if(delete >0) {
+			return true;
+		}		
+		transaction.commit();
 		}catch (Exception e) {
 			transaction.rollback();
+		throw new AdminException("The user name that you have entered already exits !!");
 		}
 		
 		return false;
