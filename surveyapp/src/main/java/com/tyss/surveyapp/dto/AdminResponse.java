@@ -14,5 +14,7 @@ public class AdminResponse {
 	private List<Questions> surveys;
 	
 	private Questions survey;
+	
+	private AuthenticationDto userDetails; 
 
 }
