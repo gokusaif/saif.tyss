@@ -9,6 +9,8 @@ import com.tyss.surveyapp.exceptions.AdminException;
 @RestControllerAdvice
 public class AdminControllerAdvice {
 
+	
+	
 	@ExceptionHandler(AdminException.class)
 	public AdminResponse handlerException(AdminException e) {
 		AdminResponse adminResponse=new AdminResponse();
