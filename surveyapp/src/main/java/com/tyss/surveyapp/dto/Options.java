@@ -26,7 +26,7 @@ public class Options implements Serializable{
 	private int optionId;
 
 	@Column
-	private String option1;
+	private String value;
 	
 
 }
