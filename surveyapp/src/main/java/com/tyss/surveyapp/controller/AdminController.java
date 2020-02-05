@@ -20,7 +20,7 @@ public class AdminController {
 
 	@Autowired
 	AdminServices adminServices;
-//
+
 	@PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public AdminResponse addQuestions(@RequestBody Questions questions) {
 		AdminResponse adminResponse = new AdminResponse();
