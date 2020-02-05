@@ -45,7 +45,32 @@ public class AuthenticationController {
 	}
 	
 	
+	@PostMapping(path = "/updateUser", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public AdminResponse updateUser(@RequestBody AuthenticationDto authenticationDto) {
+		AdminResponse adminResponse = new AdminResponse();
+		if (authenticationService.updateUser(authenticationDto)) {
+			adminResponse.setStatusCode(201);
+			adminResponse.setMessage("Password updated successfully !!");
+		}else {
+			adminResponse.setStatusCode(406);
+			adminResponse.setMessage("User Updation Failed");
+		}
+		return adminResponse;
+	}
 	
+	
+	@PostMapping(path = "/deleteUser", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public AdminResponse deleteUser(@RequestBody AuthenticationDto authenticationDto) {
+		AdminResponse adminResponse = new AdminResponse();
+		if (authenticationService.deleteUser(authenticationDto)) {
+			adminResponse.setStatusCode(201);
+			adminResponse.setMessage("User deleted successfully !!");
+		}else {
+			adminResponse.setStatusCode(406);
+			adminResponse.setMessage("User deletion Failed");
+		}
+		return adminResponse;
+	}
 	
 	
 	
