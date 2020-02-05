@@ -17,4 +17,6 @@ public class AdminResponse {
 	
 	private AuthenticationDto userDetails; 
 
+	
+	
 }
