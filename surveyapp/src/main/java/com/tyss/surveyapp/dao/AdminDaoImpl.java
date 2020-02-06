@@ -31,7 +31,6 @@ public class AdminDaoImpl implements AdminDao {
 		} catch (Exception e) {
 			throw new AdminException("Survey Name is already exists");
 		}
-
 	}
 
 	@Override
