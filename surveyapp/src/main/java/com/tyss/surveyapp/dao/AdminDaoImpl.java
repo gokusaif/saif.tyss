@@ -38,7 +38,7 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Survey> retrive() {
 
 		EntityManager manager = factory.createEntityManager();
-		String jpql = "from Questions";
+		String jpql = "from Survey";
 		TypedQuery<Survey> query = manager.createQuery(jpql, Survey.class);
 		return query.getResultList();
 	}

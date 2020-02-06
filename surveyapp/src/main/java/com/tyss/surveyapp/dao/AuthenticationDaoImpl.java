@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -85,10 +86,9 @@ public class AuthenticationDaoImpl implements AuthenticationDao {
 		EntityTransaction transaction = entityManager.getTransaction();
 		try {
 			String findUser = "from AuthenticationDto where userName=:userName";
-			Query query = entityManager.createQuery(findUser);
+			TypedQuery<AuthenticationDto> query = entityManager.createQuery(findUser,AuthenticationDto.class);
 			query.setParameter("userName", authenticationDto.getUserName());
-			AuthenticationDto userFound = (AuthenticationDto) query.getSingleResult();
-			
+			AuthenticationDto userFound = query.getSingleResult();
 			AuthenticationDto userDataToBeChanged=entityManager.find(AuthenticationDto.class, userFound.getAuthenticationID());
 			userDataToBeChanged.setPassword(authenticationDto.getPassword());
 			transaction.begin();
