@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tyss.surveyapp.dao.AdminDao;
-import com.tyss.surveyapp.dto.Questions;
+import com.tyss.surveyapp.dto.Survey;
 
 @Service
 public class AdminServicesImpl implements AdminServices{
@@ -15,19 +15,19 @@ public class AdminServicesImpl implements AdminServices{
 	AdminDao adminDao;
 
 	@Override
-	public boolean addQuestions(Questions questions) {
+	public boolean addQuestions(Survey questions) {
 		
 		return adminDao.addQuestions(questions);
 	}
 
 	@Override
-	public List<Questions> retrive() {
+	public List<Survey> retrive() {
 		
 		return adminDao.retrive();
 	}
 
 	@Override
-	public Questions retriveSurvey(String surveyName) {
+	public Survey retriveSurvey(String surveyName) {
 		
 		return adminDao.retriveSurvey(surveyName);
 	}

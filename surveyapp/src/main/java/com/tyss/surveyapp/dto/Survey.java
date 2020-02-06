@@ -14,8 +14,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table( name = "form")
-public class Questions implements Serializable{
+@Table( name = "survey")
+public class Survey implements Serializable{
 	
 	/**
 	 * 

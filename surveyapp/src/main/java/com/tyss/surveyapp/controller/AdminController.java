@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.surveyapp.dto.AdminResponse;
-import com.tyss.surveyapp.dto.Questions;
+import com.tyss.surveyapp.dto.Survey;
 import com.tyss.surveyapp.service.AdminServices;
 
 @RestController
@@ -22,7 +22,7 @@ public class AdminController {
 	AdminServices adminServices;
 
 	@PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public AdminResponse addQuestions(@RequestBody Questions questions) {
+	public AdminResponse addQuestions(@RequestBody Survey questions) {
 		AdminResponse adminResponse = new AdminResponse();
 		if (adminServices.addQuestions(questions)) {
 			adminResponse.setStatusCode(201);
@@ -34,7 +34,7 @@ public class AdminController {
 	@GetMapping(path = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
 	public AdminResponse retrieveSurveys() {
 		AdminResponse adminResponse = new AdminResponse();
-		List<Questions> list = adminServices.retrive();
+		List<Survey> list = adminServices.retrive();
 		if( list.size() > 0  ) {
 			adminResponse.setStatusCode(201);
 			adminResponse.setMessage("Success");
@@ -49,7 +49,7 @@ public class AdminController {
 	@GetMapping(path = "/get/{surveyName}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public AdminResponse retrieveSurvey(@PathVariable String surveyName ) {
 		AdminResponse adminResponse = new AdminResponse();
-		Questions survey = adminServices.retriveSurvey(surveyName);
+		Survey survey = adminServices.retriveSurvey(surveyName);
 		if(survey != null) {
 			adminResponse.setStatusCode(201);
 			adminResponse.setMessage("Success");

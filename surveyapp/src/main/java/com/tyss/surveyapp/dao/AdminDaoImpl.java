@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.tyss.surveyapp.dto.Questions;
+import com.tyss.surveyapp.dto.Survey;
 import com.tyss.surveyapp.exceptions.AdminException;
 
 @Repository
@@ -20,7 +20,7 @@ public class AdminDaoImpl implements AdminDao {
 	EntityManagerFactory factory;
 
 	@Override
-	public boolean addQuestions(Questions questions) {
+	public boolean addQuestions(Survey questions) {
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		try {
@@ -35,20 +35,20 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Questions> retrive() {
+	public List<Survey> retrive() {
 
 		EntityManager manager = factory.createEntityManager();
 		String jpql = "from Questions";
-		TypedQuery<Questions> query = manager.createQuery(jpql, Questions.class);
+		TypedQuery<Survey> query = manager.createQuery(jpql, Survey.class);
 		return query.getResultList();
 	}
 
 	@Override
-	public Questions retriveSurvey(String surveyName) {
+	public Survey retriveSurvey(String surveyName) {
 		EntityManager manager = factory.createEntityManager();
-		Questions survey = null;
+		Survey survey = null;
 		try {
-			survey = manager.find(Questions.class, surveyName);
+			survey = manager.find(Survey.class, surveyName);
 			return survey;
 		} catch (Exception e) {
 			throw new AdminException("Surveyname is not found");
@@ -59,9 +59,9 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public boolean removeSurvey(String surveyName) {
 		EntityManager manager = factory.createEntityManager();
-		Questions survey = null;
+		Survey survey = null;
 		try {
-			survey = manager.find(Questions.class, surveyName);
+			survey = manager.find(Survey.class, surveyName);
 			EntityTransaction transaction = manager.getTransaction();
 			transaction.begin();
 			manager.remove(survey);

@@ -11,9 +11,9 @@ public class AdminResponse {
 	
 	private String message;
 	
-	private List<Questions> surveys;
+	private List<Survey> surveys;
 	
-	private Questions survey;
+	private Survey survey;
 	
 	private AuthenticationDto userDetails; 
 

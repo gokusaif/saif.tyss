@@ -2,16 +2,16 @@ package com.tyss.surveyapp.service;
 
 import java.util.List;
 
-import com.tyss.surveyapp.dto.Questions;
+import com.tyss.surveyapp.dto.Survey;
 
 public interface AdminServices {
 
 	
-	public boolean addQuestions(Questions questions);
+	public boolean addQuestions(Survey questions);
 	
-	public List<Questions> retrive();	
+	public List<Survey> retrive();	
 	
-	public Questions retriveSurvey(String surveyName);
+	public Survey retriveSurvey(String surveyName);
 	
 	public boolean removeSurvey(String surveyName);
 	
