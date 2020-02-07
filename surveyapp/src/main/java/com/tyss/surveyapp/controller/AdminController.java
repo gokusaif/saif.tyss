@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.surveyapp.dto.AdminResponse;
+import com.tyss.surveyapp.dto.Question;
 import com.tyss.surveyapp.dto.SurveyResponse;
 import com.tyss.surveyapp.dto.Survey;
 import com.tyss.surveyapp.service.AdminServices;
@@ -42,6 +43,9 @@ public class AdminController {
 			adminResponse.setStatusCode(201);
 			adminResponse.setMessage("Success");
 			adminResponse.setSurveys(list);
+			adminResponse.setCount(list.size());
+			adminResponse.setOffset(0);
+			adminResponse.setLimit(list.size() - 1);
 		} else {
 			adminResponse.setStatusCode(406);
 			adminResponse.setMessage("Surveys does not exist");
@@ -57,6 +61,10 @@ public class AdminController {
 			adminResponse.setStatusCode(201);
 			adminResponse.setMessage("Success");
 			adminResponse.setSurvey(survey);
+			List<Question> questions = survey.getQuestions();
+			adminResponse.setCount(questions.size());
+			adminResponse.setOffset(0);
+			adminResponse.setLimit(questions.size() - 1);
 		}
 		return adminResponse;
 	}

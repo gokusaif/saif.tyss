@@ -19,5 +19,9 @@ public class AdminResponse {
 
 	private SurveyResponse answered;
 	
+	private int count;
 	
+	private int offset;
+	
+	private int limit;
 }
