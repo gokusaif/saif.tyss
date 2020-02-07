@@ -45,7 +45,10 @@ public class AdminController {
 			adminResponse.setSurveys(list);
 			adminResponse.setCount(list.size());
 			adminResponse.setOffset(0);
-			adminResponse.setLimit(list.size() - 1);
+			if (list.size() > 1) {
+				adminResponse.setLimit(list.size() - 1);
+			}
+			adminResponse.setLimit(list.size());
 		} else {
 			adminResponse.setStatusCode(406);
 			adminResponse.setMessage("Surveys does not exist");
@@ -64,7 +67,10 @@ public class AdminController {
 			List<Question> questions = survey.getQuestions();
 			adminResponse.setCount(questions.size());
 			adminResponse.setOffset(0);
-			adminResponse.setLimit(questions.size() - 1);
+			if (questions.size() > 1) {
+				adminResponse.setLimit(questions.size() - 1);
+			}
+			adminResponse.setLimit(questions.size());
 		}
 		return adminResponse;
 	}
@@ -90,9 +96,9 @@ public class AdminController {
 	}
 
 	@GetMapping(path = "/answer/{userEmail}/{surveyName}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public AdminResponse getAnswered(@PathVariable String userEmail,  @PathVariable String surveyName) {
+	public AdminResponse getAnswered(@PathVariable String userEmail, @PathVariable String surveyName) {
 		AdminResponse adminResponse = new AdminResponse();
-		SurveyResponse answered = adminServices.getAnswered(userEmail,surveyName);
+		SurveyResponse answered = adminServices.getAnswered(userEmail, surveyName);
 		adminResponse.setStatusCode(201);
 		adminResponse.setMessage("Survey reply");
 		adminResponse.setAnswered(answered);
