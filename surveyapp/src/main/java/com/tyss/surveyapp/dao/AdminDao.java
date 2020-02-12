@@ -3,6 +3,7 @@ package com.tyss.surveyapp.dao;
 import java.util.List;
 
 import com.tyss.surveyapp.dto.SurveyResponse;
+import com.tyss.surveyapp.dto.Question;
 import com.tyss.surveyapp.dto.Survey;
 
 public interface AdminDao {
@@ -19,4 +20,7 @@ public interface AdminDao {
 	
 	public SurveyResponse getAnswered(String userEmail,String surveyName);
 	
+	public boolean removeAnswered(int id);	
+	
+	public Question getQuestion(int id);
 }

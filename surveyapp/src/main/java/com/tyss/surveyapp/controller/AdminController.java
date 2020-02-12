@@ -3,7 +3,9 @@ package com.tyss.surveyapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.surveyapp.dto.AdminResponse;
 import com.tyss.surveyapp.dto.Question;
-import com.tyss.surveyapp.dto.SurveyResponse;
 import com.tyss.surveyapp.dto.Survey;
+import com.tyss.surveyapp.dto.SurveyResponse;
 import com.tyss.surveyapp.service.AdminServices;
 
 @RestController
@@ -99,10 +101,36 @@ public class AdminController {
 	public AdminResponse getAnswered(@PathVariable String userEmail, @PathVariable String surveyName) {
 		AdminResponse adminResponse = new AdminResponse();
 		SurveyResponse answered = adminServices.getAnswered(userEmail, surveyName);
-		adminResponse.setStatusCode(201);
-		adminResponse.setMessage("Survey reply");
-		adminResponse.setAnswered(answered);
+		if (answered != null) {
+			adminResponse.setStatusCode(201);
+			adminResponse.setMessage("Survey reply");
+			adminResponse.setAnswered(answered);
+		} else {
+			adminResponse.setStatusCode(405);
+			adminResponse.setMessage("Answered survey not found");
+		}
 		return adminResponse;
+	}
+
+	@DeleteMapping(path = "/answer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public AdminResponse deleteAnswered(@PathVariable int id) {
+		AdminResponse adminResponse = new AdminResponse();
+		if (adminServices.removeAnswered(id)) {
+			adminResponse.setStatusCode(201);
+			adminResponse.setMessage("Deleted");
+		}
+		return adminResponse;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@GetMapping(path = "/getquestion/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity getQuestion(@PathVariable int id) {
+		Question question = adminServices.getQuestion(id);
+		if (question != null) {
+			return new ResponseEntity<Question>(question, HttpStatus.ACCEPTED);
+		}
+		return new ResponseEntity("Question not found", HttpStatus.BAD_REQUEST);
+//		return question.getOptions();
 	}
 
 }

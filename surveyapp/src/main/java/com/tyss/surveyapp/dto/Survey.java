@@ -26,9 +26,14 @@ public class Survey implements Serializable{
 	@Id
 	@Column
 	private String surveyName;
-	
-	@Column
-	@OneToMany(cascade = CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "survey")
 	private List<Question> questions;
 	
+	
+	
+	
+//	@Column
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<Question> questions;
 }

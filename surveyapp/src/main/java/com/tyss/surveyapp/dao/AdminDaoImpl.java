@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import com.tyss.surveyapp.dto.Question;
 import com.tyss.surveyapp.dto.Survey;
 import com.tyss.surveyapp.dto.SurveyResponse;
 import com.tyss.surveyapp.exceptions.AdminException;
@@ -21,16 +22,21 @@ public class AdminDaoImpl implements AdminDao {
 	EntityManagerFactory factory;
 
 	@Override
-	public boolean addQuestions(Survey questions) {
+	public boolean addQuestions(Survey survey) {
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		try {
 			transaction.begin();
-			manager.persist(questions);
+			List<Question> questions = survey.getQuestions();
+			for (Question question : questions) {
+				question.setSurvey(survey);
+			}
+			survey.setQuestions(questions);
+			manager.persist(survey);
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
-			throw new AdminException("Survey Name is already exists");
+			throw new AdminException("Survey name already exists");
 		}
 	}
 
@@ -81,7 +87,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public SurveyResponse getAnswered(String userEmail,String surveyName) {
+	public SurveyResponse getAnswered(String userEmail, String surveyName) {
 		EntityManager manager = factory.createEntityManager();
 		String jpql = "from SurveyResponse where userEmail=:email and surveyName=:surveyName";
 		TypedQuery<SurveyResponse> query = manager.createQuery(jpql, SurveyResponse.class);
@@ -91,7 +97,28 @@ public class AdminDaoImpl implements AdminDao {
 			SurveyResponse surveyResponse = query.getSingleResult();
 			return surveyResponse;
 		} catch (Exception e) {
-			throw new AdminException("No survey found which is submitted by the user");
+			return null;
 		}
+	}
+
+	@Override
+	public boolean removeAnswered(int id) {
+		EntityManager manager = factory.createEntityManager();
+		EntityTransaction transaction = manager.getTransaction();
+		SurveyResponse survey = manager.find(SurveyResponse.class, id);
+		if (survey != null) {
+			transaction.begin();
+			manager.remove(survey);
+			transaction.commit();
+			return true;
+		}
+		throw new AdminException("Answered survey not found");
+	}
+	
+	
+	public Question getQuestion(int id) {
+		EntityManager manager = factory.createEntityManager();
+		Question question = manager.find(Question.class, id);
+		return question;
 	}
 }
