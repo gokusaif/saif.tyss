@@ -1,0 +1,43 @@
+<!-- <div class="alert alert-danger" *ngIf='message'>{{message}}</div> -->
+<div class="col-md-4 offset-md-4 mt-5">
+    <div class="form-group">
+        <h4>Filter</h4>
+        <label for="search">Enter name to filter partners</label>
+        <input type="search" name='search'  #search='ngModel' ngModel class="form-control">
+    </div>
+</div>
+<h4>Partners</h4>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="thead-dark">
+                <th>Partner Id</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Address</th>
+                <th>Emails</th>
+                <th>Phone Numbers</th>
+                <th>Partner Id</th>
+                <th>View</th>
+                <th>Update</th>
+                <th>Deactivate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let partner of partners | filterPartner:search.value'>
+                <td>{{partner.id}}</td>
+                <td>{{partner.name}}</td>
+                <td>{{partner.date}}</td>
+                <td>{{partner.status}}</td>
+                <td>{{partner.addresses}}</td>
+                <td>{{partner.emails}}</td>
+                <td>{{partner.phoneNumbers}}</td>
+                <td>{{partner.partnerId}}</td>
+                <td><button type="button" class="btn btn-primary" (click)='view(partner.id)'>View</button></td>
+                <td><button type="button" class="btn btn-primary" (click)='update(partner)'>Update</button></td>
+                <td><button type="button" class="btn btn-danger" (click)='delete(partner.id)'>Deactivate</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,17 @@
+<div class="col-md-4 offset-md-4 mt-5">
+    <form #searchForm='ngForm' (ngSubmit)='view(searchForm.value)'>
+        <div class="form-group">
+            <h4>Enter Customer id to search</h4>
+            <input type="text" #search='ngModel' ngModel required name="search" pattern="[0-9]+" maxlength="5" class="form-control"> 
+            <div class="text-danger" *ngIf='search.invalid && (search.touched || search.dirty) '>
+               <div *ngIf='search.errors.required'>
+                *This field is mandatory
+               </div>
+               <div *ngIf='search.errors.pattern'>
+                Enter only numbers
+               </div>
+            </div> <br>
+            <button [disabled]='searchForm.invalid' class="btn btn-primary" (click)='view(search.value)'>Search</button>
+        </div>
+    </form>
+</div>

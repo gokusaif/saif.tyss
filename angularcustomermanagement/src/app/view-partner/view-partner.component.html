@@ -1,0 +1,110 @@
+<div *ngIf='!partner'>
+    <h4>Partner not found</h4>
+</div>
+<div *ngIf='partner'>
+    <div class="container mt-2" style="margin-bottom: 100px;">
+        <h4>Partner</h4>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="thead-dark">
+                    <th>Partner Id</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Address</th>
+                    <th>Emails</th>
+                    <th>Phone Numbers</th>
+                    <th>Partner Id</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{partner.id}}</td>
+                    <td>{{partner.name}}</td>
+                    <td>{{partner.date}}</td>
+                    <td>{{partner.status}}</td>
+                    <td>{{partner.addresses}}</td>
+                    <td>{{partner.emails}}</td>
+                    <td>{{partner.phoneNumbers}}</td>
+                    <td>{{partner.partnerId}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)='update(partner)'>Update</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" (click)='addCustomer()'> Add customer </button>
+    </div>
+
+
+    <div *ngIf='partner.customers.length != 0' class="container mt-2" style="margin-bottom: 100px;">
+        <h4>Customers</h4> 
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="thead-dark">
+                    <th>Customer Id</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Address</th>
+                    <th>Emails</th>
+                    <th>Phone Numbers</th>
+                    <th>Partner Name</th>
+                    <th>Update</th>
+                    <th>Deactivate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let customer of partner.customers'>
+                    <td>{{customer.id}}</td>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.date}}</td>
+                    <td>{{customer.status}}</td>
+                    <td>{{customer.addresses}}</td>
+                    <td>{{customer.emails}}</td>
+                    <td>{{customer.phoneNumbers}}</td>
+                    <td>{{customer.partnerName}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)='updateCustomer(customer)'>Update</button>
+                    </td>
+                    <td><button type="button" class="btn btn-danger"
+                            (click)='deleteCustomer(customer.id)'>Deactivate</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <div *ngIf='partner.subPartners.length != 0' class="container mt-2" style="margin-bottom: 100px;">
+        <h4>Sub Partners</h4>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="thead-dark">
+                    <th>Partner Id</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Address</th>
+                    <th>Emails</th>
+                    <th>Phone Numbers</th>
+                    <th>Partner Id</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let subPartner of partner.subPartners'>
+                    <td>{{subPartner.id}}</td>
+                    <td>{{subPartner.name}}</td>
+                    <td>{{subPartner.date}}</td>
+                    <td>{{subPartner.status}}</td>
+                    <td>{{subPartner.addresses}}</td>
+                    <td>{{subPartner.emails}}</td>
+                    <td>{{subPartner.phoneNumbers}}</td>
+                    <td>{{subPartner.partnerId}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)='viewPartner(subPartner.id)'>View</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

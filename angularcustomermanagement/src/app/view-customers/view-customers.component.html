@@ -1,0 +1,39 @@
+<div class="col-md-4 offset-md-4 mt-5">
+    <div class="form-group">
+        <h4>Filter</h4>
+        <label for="search">Enter name to filter customers</label>
+        <input type="search" name='search' #search='ngModel' ngModel class="form-control">
+    </div>
+</div>
+<h4>Customers</h4>
+<!-- <div class="alert alert-danger" *ngIf='message'>{{message}}</div> -->
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="thead-dark">
+            <th>Customer Id</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Address</th>
+            <th>Emails</th>
+            <th>Phone Numbers</th>
+            <th>Partner Name</th>
+            <th>Update</th>
+            <th>Deactivate</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let customer of customers |filterCustomer:search.value'>
+            <td>{{customer.id}}</td>
+            <td>{{customer.name}}</td>
+            <td>{{customer.date}}</td>
+            <td>{{customer.status}}</td>
+            <td>{{customer.addresses}}</td>
+            <td>{{customer.emails}}</td>
+            <td>{{customer.phoneNumbers}}</td>
+            <td>{{customer.partnerName}}</td>
+            <td><button type="button" class="btn btn-primary" (click)='update(customer)'>Update</button></td>
+            <td><button type="button" class="btn btn-danger" (click)='delete(customer.id)'>Deactivate</button></td>
+        </tr>
+    </tbody>
+</table>
